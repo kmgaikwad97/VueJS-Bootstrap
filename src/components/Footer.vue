@@ -151,7 +151,7 @@ export default {
     // } else {
     //   this.$router.push("/404");
     // }
-    console.log(this.$route.params.to);
+    console.log(this.$route);
   },
   methods: {
     // console.log(router);
@@ -160,7 +160,7 @@ export default {
     },
     change(Value) {
       // console.log(Value);
-      console.log(window.location.href);
+      // console.log(window.location.href);
       this.home = false;
       this.about = true;
       this.service = true;
