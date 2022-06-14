@@ -19,8 +19,7 @@
           >
         </div> -->
 
-          <!-- 
-          <router-link
+          <!-- <router-link
             v-for="(data, index) in navigation"
             @click="change(index)"
             :v-if="routedata == data.name"
@@ -31,7 +30,29 @@
             >{{ data.name }}{{ routedata }}</router-link
           > -->
 
-          <router-link
+          <div class="golden-div-imp">
+            <div
+              class="golden-div"
+              v-for="(nav, index) in navigation"
+              :key="index"
+            >
+              <span
+                class="golden-btn"
+                v-show="nav.name !== this.$route.name"
+                @click.enter="scrollToTop"
+                @click="changeRoute(nav, index)"
+                >{{ nav.name }}</span
+              >
+            </div>
+          </div>
+
+          <!-- <div v-for="(nav, index) in navigation" :key="index">
+            <span v-show="nav.name !== this.$route.name">{{ nav.name }}</span>
+          </div> -->
+
+          <!-- long Approach -->
+
+          <!-- <router-link
             class="nav-link datalink"
             v-if="home"
             @click="change('Home')"
@@ -41,6 +62,10 @@
           >
           <router-link
             class="nav-link datalink"
+
+
+
+
             v-if="about"
             @click="change('About')"
             @click.enter="scrollToTop"
@@ -62,10 +87,10 @@
             @click.enter="scrollToTop"
             to="/contact"
             >Contact</router-link
-          >
+          > -->
         </div>
 
-        <div class="col-sm-12 col-md-4">
+        <div v-show="this.$route.name !== 'Contact'" class="col-sm-12 col-md-4">
           <div class="padd">
             <div class="footer-heading">
               <h3 class="titlefoot">Get in touch</h3>
@@ -96,7 +121,7 @@
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-4">
+        <div v-show="this.$route.name !== 'Contact'" class="col-sm-12 col-md-4">
           <div class="padd">
             <div class="footer-heading">
               <h3 class="titlefoot">Where we are</h3>
@@ -120,6 +145,7 @@ export default {
       // HideHome: false,
       // console.log(router);
       // navigation:""
+
       home: false,
       about: true,
       service: true,
@@ -135,7 +161,7 @@ export default {
         },
         {
           link: "/services",
-          name: "Service",
+          name: "Services",
         },
         {
           link: "/contact",
@@ -157,6 +183,15 @@ export default {
     // console.log(router);
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    changeRoute(data, index) {
+      console.log("data", data, index);
+      const newArray = this.navigation;
+
+      this.$router.push(data.link);
+      console.log(">>>>+++", newArray.length);
+      // newArray.splice(index, 1);
+      console.log(data.name);
     },
     change(Value) {
       // console.log(Value);
@@ -189,6 +224,7 @@ export default {
         this.about = true;
         this.home = true;
       }
+      console.log(">>>>>++++>>>>", this.$route.name);
 
       // console.log(this.$router.currentRoute._value.name + " value");
       // console.log("current func", this.$route);
@@ -260,7 +296,7 @@ export default {
 .footer-column-1 {
   text-align: center;
   font-size: 20px;
-  padding-bottom: 4%;
+  padding-bottom: 0%;
 }
 
 .nav-link {
@@ -302,6 +338,24 @@ export default {
 
 .footer-list {
   color: #000;
+}
+
+.golden-btn {
+  color: #2f7ef5;
+  cursor: pointer !important;
+  pointer-events: auto;
+  cursor: hand;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 10px 0 !important;
+}
+
+.golden-div {
+  padding: 0 5px;
+}
+
+.golden-div-imp {
+  padding: 10%;
 }
 
 @media only screen and (max-width: 766px) {
